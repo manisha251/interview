@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Reverse Interview Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .navbar {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+        
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        
+        .error {
+            color: #dc3545;
+            margin-top: 0.5rem;
+        }
+        
+        .success {
+            color: #28a745;
+            margin-top: 0.5rem;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .feature h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+        }
+        
+        .candidate-card,
+        .offer-card {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+        }
+        
+        .verification-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+        
+        .verified {
+            background: #28a745;
+            color: white;
+        }
+        
+        .unverified {
+            background: #ffc107;
+            color: #212529;
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- Home Page -->
+        <div id="home-page" class="page">
+            <div class="container">
+                <div class="hero">
+                    <h1>Reverse Interview Platform</h1>
+                    <p>Connect talented candidates with verified companies</p>
+                    <a href="#" class="btn btn-primary" onclick="showPage('candidate-register')">Register as Candidate</a>
+                    <a href="#" class="btn btn-secondary" onclick="showPage('company-register')">Register as Company</a>
+                </div>
+                
+                <div class="features">
+                    <div class="feature">
+                        <h3>🎯 For Candidates</h3>
+                        <p>Create your profile, showcase your skills, and receive offers from verified companies.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>🏢 For Companies</h3>
+                        <p>Find qualified candidates, send personalized offers, and build your team.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>✅ Verified Companies</h3>
+                        <p>All companies are verified to ensure authenticity and trust in the hiring process.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Candidate Register Page -->
+        <div id="candidate-register-page" class="page hidden">
+            <div class="container">
+                <div class="navbar">
+                    <h2>Reverse Interview Platform</h2>
+                    <div class="nav-links">
+                        <a href="#" class="btn btn-secondary" onclick="showPage('home')">Home</a>
+                        <a href="#" class="btn btn-secondary" onclick="showPage('login')">Login</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2>Register as Candidate</h2>
+                    <form id="candidate-register-form">
+                        <div class="form-group">
+                            <label for="candidate-name">Full Name</label>
+                            <input type="text" id="candidate-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="candidate-email">Email</label>
+                            <input type="email" id="candidate-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="candidate-password">Password</label>
+                            <input type="password" id="candidate-password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="candidate-skills">Skills</label>
+                            <textarea id="candidate-skills" placeholder="e.g., React, Node.js, Python"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Register</button>
+                        <div id="candidate-register-message"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Company Register Page -->
+        <div id="company-register-page" class="page hidden">
+            <div class="container">
+                <div class="navbar">
+                    <h2>Reverse Interview Platform</h2>
+                    <div class="nav-links">
+                        <a href="#" class="btn btn-secondary" onclick="showPage('home')">Home</a>
+                        <a href="#" class="btn btn-secondary" onclick="showPage('login')">Login</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2>Register as Company</h2>
+                    <form id="company-register-form">
+                        <div class="form-group">
+                            <label for="company-name">Company Name</label>
+                            <input type="text" id="company-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="company-email">Email</label>
+                            <input type="email" id="company-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="company-password">Password</label>
+                            <input type="password" id="company-password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="company-description">Description</label>
+                            <textarea id="company-description" placeholder="Tell us about your company..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Register</button>
+                        <div id="company-register-message"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Page -->
+        <div id="login-page" class="page hidden">
+            <div class="container">
+                <div class="navbar">
+                    <h2>Reverse Interview Platform</h2>
+                    <div class="nav-links">
+                        <a href="#" class="btn btn-secondary" onclick="showPage('home')">Home</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2>Login</h2>
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                        <div id="login-message"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Candidate Dashboard -->
+        <div id="candidate-dashboard-page" class="page hidden">
+            <div class="container">
+                <div class="navbar">
+                    <h2>Candidate Dashboard</h2>
+                    <div class="nav-links">
+                        <span id="candidate-welcome">Welcome!</span>
+                        <a href="#" class="btn btn-secondary" onclick="logout()">Logout</a>
+                    </div>
+                </div>
+                
+                <div class="dashboard">
+                    <div>
+                        <div class="card">
+                            <h3>My Profile</h3>
+                            <div id="candidate-profile"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="card">
+                            <h3>My Offers (<span id="offers-count">0</span>)</h3>
+                            <div id="candidate-offers"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Company Dashboard -->
+        <div id="company-dashboard-page" class="page hidden">
+            <div class="container">
+                <div class="navbar">
+                    <h2>Company Dashboard</h2>
+                    <div class="nav-links">
+                        <span id="company-welcome">Welcome!</span>
+                        <a href="#" class="btn btn-secondary" onclick="logout()">Logout</a>
+                    </div>
+                </div>
+                
+                <div class="dashboard">
+                    <div>
+                        <div class="card">
+                            <h3>Company Profile</h3>
+                            <div id="company-profile"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="card">
+                            <h3>Available Candidates</h3>
+                            <div id="available-candidates"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock data
+        const mockData = {
+            candidates: [
+                { id: 1, name: "John Doe", email: "john@example.com", skills: "React, Node.js, JavaScript" },
+                { id: 2, name: "Jane Smith", email: "jane@example.com", skills: "Python, Django, PostgreSQL" },
+                { id: 3, name: "Mike Johnson", email: "mike@example.com", skills: "Java, Spring Boot, MySQL" }
+            ],
+            companies: [
+                { id: 1, companyName: "Tech Corp", email: "company@techcorp.com", description: "Leading technology company", isVerified: true, verificationCode: "123456" },
+                { id: 2, companyName: "StartupXYZ", email: "info@startupxyz.com", description: "Innovative startup", isVerified: false, verificationCode: "789012" }
+            ],
+            offers: [
+                { id: 1, companyId: 1, candidateId: 1, message: "We would like to offer you a Senior Developer position!", isVerifiedCompany: true, companyName: "Tech Corp", status: "PENDING" },
+                { id: 2, companyId: 2, candidateId: 1, message: "Join our team as a Full Stack Developer!", isVerifiedCompany: false, companyName: "StartupXYZ", status: "PENDING" }
+            ]
+        };
+
+        let currentUser = null;
+
+        // Page navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.add('hidden');
+            });
+            document.getElementById(pageId + '-page').classList.remove('hidden');
+        }
+
+        // Mock API functions
+        function mockRegisterCandidate(data) {
+            const newCandidate = {
+                id: mockData.candidates.length + 1,
+                ...data
+            };
+            mockData.candidates.push(newCandidate);
+            return newCandidate;
+        }
+
+        function mockRegisterCompany(data) {
+            const newCompany = {
+                id: mockData.companies.length + 1,
+                isVerified: false,
+                verificationCode: Math.random().toString(36).substring(2, 8),
+                ...data
+            };
+            mockData.companies.push(newCompany);
+            return newCompany;
+        }
+
+        function mockLogin(email, password) {
+            const candidate = mockData.candidates.find(c => c.email === email && c.password === password);
+            if (candidate) {
+                return { role: 'candidate', data: candidate };
+            }
+            
+            const company = mockData.companies.find(c => c.email === email && c.password === password);
+            if (company) {
+                return { role: 'company', data: company };
+            }
+            
+            throw new Error('Invalid email or password');
+        }
+
+        // Form handlers
+        document.getElementById('candidate-register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = {
+                name: document.getElementById('candidate-name').value,
+                email: document.getElementById('candidate-email').value,
+                password: document.getElementById('candidate-password').value,
+                skills: document.getElementById('candidate-skills').value
+            };
+            
+            try {
+                const candidate = mockRegisterCandidate(formData);
+                document.getElementById('candidate-register-message').innerHTML = 
+                    '<div class="success">Registration successful! You can now login.</div>';
+                this.reset();
+                setTimeout(() => showPage('login'), 2000);
+            } catch (error) {
+                document.getElementById('candidate-register-message').innerHTML = 
+                    '<div class="error">Registration failed: ' + error.message + '</div>';
+            }
+        });
+
+        document.getElementById('company-register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = {
+                companyName: document.getElementById('company-name').value,
+                email: document.getElementById('company-email').value,
+                password: document.getElementById('company-password').value,
+                description: document.getElementById('company-description').value
+            };
+            
+            try {
+                const company = mockRegisterCompany(formData);
+                document.getElementById('company-register-message').innerHTML = 
+                    '<div class="success">Registration successful! Your verification code is: ' + company.verificationCode + '</div>';
+                this.reset();
+                setTimeout(() => showPage('login'), 3000);
+            } catch (error) {
+                document.getElementById('company-register-message').innerHTML = 
+                    '<div class="error">Registration failed: ' + error.message + '</div>';
+            }
+        });
+
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            try {
+                const result = mockLogin(email, password);
+                currentUser = result.data;
+                
+                if (result.role === 'candidate') {
+                    showCandidateDashboard();
+                } else {
+                    showCompanyDashboard();
+                }
+            } catch (error) {
+                document.getElementById('login-message').innerHTML = 
+                    '<div class="error">' + error.message + '</div>';
+            }
+        });
+
+        function showCandidateDashboard() {
+            document.getElementById('candidate-welcome').textContent = 'Welcome, ' + currentUser.name;
+            document.getElementById('candidate-profile').innerHTML = `
+                <p><strong>Name:</strong> ${currentUser.name}</p>
+                <p><strong>Email:</strong> ${currentUser.email}</p>
+                <p><strong>Skills:</strong> ${currentUser.skills}</p>
+            `;
+            
+            const candidateOffers = mockData.offers.filter(offer => offer.candidateId === currentUser.id);
+            document.getElementById('offers-count').textContent = candidateOffers.length;
+            
+            if (candidateOffers.length === 0) {
+                document.getElementById('candidate-offers').innerHTML = '<p>No offers received yet.</p>';
+            } else {
+                document.getElementById('candidate-offers').innerHTML = candidateOffers.map(offer => `
+                    <div class="offer-card">
+                        <h4>Offer from ${offer.companyName}</h4>
+                        <span class="verification-badge ${offer.isVerifiedCompany ? 'verified' : 'unverified'}">
+                            ${offer.isVerifiedCompany ? '✓ VERIFIED' : '⚠ UNVERIFIED'}
+                        </span>
+                        <p><strong>Message:</strong> ${offer.message}</p>
+                        <p><strong>Status:</strong> ${offer.status}</p>
+                        <div style="margin-top: 10px;">
+                            <button class="btn btn-success">Accept</button>
+                            <button class="btn btn-secondary">Decline</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            showPage('candidate-dashboard');
+        }
+
+        function showCompanyDashboard() {
+            document.getElementById('company-welcome').textContent = 'Welcome, ' + currentUser.companyName;
+            document.getElementById('company-profile').innerHTML = `
+                <p><strong>Company Name:</strong> ${currentUser.companyName}</p>
+                <p><strong>Email:</strong> ${currentUser.email}</p>
+                <p><strong>Description:</strong> ${currentUser.description}</p>
+                <p><strong>Verification Status:</strong> 
+                    <span class="verification-badge ${currentUser.isVerified ? 'verified' : 'unverified'}">
+                        ${currentUser.isVerified ? '✓ VERIFIED' : '⚠ UNVERIFIED'}
+                    </span>
+                </p>
+                ${!currentUser.isVerified ? `<p><strong>Verification Code:</strong> ${currentUser.verificationCode}</p>` : ''}
+            `;
+            
+            document.getElementById('available-candidates').innerHTML = mockData.candidates.map(candidate => `
+                <div class="candidate-card">
+                    <h4>${candidate.name}</h4>
+                    <p><strong>Email:</strong> ${candidate.email}</p>
+                    <p><strong>Skills:</strong> ${candidate.skills}</p>
+                    <button class="btn btn-success" onclick="sendOffer(${candidate.id}, '${candidate.name}')">
+                        Send Offer
+                    </button>
+                </div>
+            `).join('');
+            
+            showPage('company-dashboard');
+        }
+
+        function sendOffer(candidateId, candidateName) {
+            const message = prompt(`Enter offer message for ${candidateName}:`, 'We would like to offer you a position at our company!');
+            if (message) {
+                const newOffer = {
+                    id: mockData.offers.length + 1,
+                    companyId: currentUser.id,
+                    candidateId: candidateId,
+                    message: message,
+                    isVerifiedCompany: currentUser.isVerified,
+                    companyName: currentUser.companyName,
+                    status: "PENDING"
+                };
+                mockData.offers.push(newOffer);
+                alert('Offer sent successfully!');
+                showCompanyDashboard(); // Refresh dashboard
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+            document.getElementById('login-form').reset();
+            showPage('home');
+        }
+
+        // Initialize
+        showPage('home');
+    </script>
+</body>
+</html>
