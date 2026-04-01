@@ -26,9 +26,22 @@ const CandidateRegister = () => {
     setError('');
     setSuccess('');
     
+    console.log('Submitting registration with data:', candidate);
+    
     try {
-      await registerCandidate(candidate);
-      setSuccess('Registration successful! Please login.');
+      const response = await registerCandidate(candidate);
+      console.log('Registration successful:', response);
+      setSuccess(`Registration successful! Welcome ${candidate.name}! Redirecting to login...`);
+      
+      // Clear the form
+      setCandidate({
+        name: '',
+        email: '',
+        password: '',
+        skills: ''
+      });
+      
+      // Redirect to login after 2 seconds
       setTimeout(() => {
         navigate('/login');
       }, 2000);

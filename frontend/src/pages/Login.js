@@ -31,7 +31,10 @@ const Login = () => {
         navigate('/dashboard/company');
       }
     } catch (error) {
-      setError('Invalid email or password');
+      console.error('Login error:', error);
+      console.error('Error details:', JSON.stringify(error, null, 2));
+      const errorMessage = error.response?.data?.message || error.message || 'Invalid email or password';
+      setError(errorMessage);
     }
   };
 
