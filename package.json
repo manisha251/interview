@@ -17,6 +17,6 @@
   "author": "Your Name",
   "license": "MIT",
   "engines": {
-    "node": "16.x"
+    "node": "24.x"
   }
 }
