@@ -1,20 +1,23 @@
-# Ignore backend files
-backend/
+# Ignore everything except frontend
+*
 
-# Ignore deployment scripts
+# Allow frontend directory
+!frontend/**
+
+# Allow vercel.json and other config files in root
+!vercel.json
+!.vercelignore
+
+# Ignore all other directories and files
+backend/
 deploy/
 simple-deploy/
 vercel-deploy/
-
-# Ignore documentation
 *.md
 !README.md
-
-# Ignore Docker files
 Dockerfile
 docker-compose.yml
 .dockerignore
-
-# Ignore other config files
 nginx.conf
 start.js
+package.json
