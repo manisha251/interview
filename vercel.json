@@ -23,10 +23,7 @@
     "start.js": {
       "runtime": "nodejs24.x"
     }
-  },
-  "functions": {
-    "start.js": {
-      "runtime": "nodejs24.x"
-    }
+  }
+}
   }
 }
