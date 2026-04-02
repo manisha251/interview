@@ -1,5 +1,5 @@
 # Simple Dockerfile for Render deployment
-FROM openjdk:17-slim
+FROM openjdk:17
 
 # Install Maven
 RUN apt-get update && apt-get install -y maven && rm -rf /var/lib/apt/lists/*
