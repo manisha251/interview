@@ -19,8 +19,10 @@
       "dest": "/index.html"
     }
   ],
-  "env": {
-    "REACT_APP_API_URL": ""
+  "functions": {
+    "start.js": {
+      "runtime": "nodejs24.x"
+    }
   },
   "functions": {
     "start.js": {
