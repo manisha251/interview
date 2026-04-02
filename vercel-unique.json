@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "name": "reverse-interview-platform-manisha",
+  "builds": [
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/" }
+  ],
+  "env": {
+    "REACT_APP_API_URL": ""
+  }
+}

@@ -15,8 +15,5 @@
   "devDependencies": {},
   "keywords": ["react", "interview", "platform"],
   "author": "Your Name",
-  "license": "MIT",
-  "engines": {
-    "node": "24.x"
-  }
+  "license": "MIT"
 }

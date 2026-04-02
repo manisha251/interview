@@ -25,7 +25,9 @@
       "react-app/jest"
     ]
   },
-  "browserslist": {
+  "engines": {
+    "node": "24.x"
+  },
     "production": [
       ">0.2%",
       "not dead",
